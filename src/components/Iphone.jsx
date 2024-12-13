@@ -4,12 +4,13 @@ Command: npx gltfjsx@6.5.3 ./public/phone.glb -o ./src/components/Iphone.jsx
 */
 
 import React from 'react'
-import { useGLTF, useTexture } from '@react-three/drei'
+import { Text, useGLTF, useTexture } from '@react-three/drei'
 
-export function Iphone(props) {
+export function Iphone({pic, ...props}) {
   const { nodes, materials } = useGLTF('/phone.glb')
-  const PicTexture = useTexture('./public/pictures/pic1.jpeg')
+  const PicTexture = useTexture(`./public/pictures/pic${pic}.jpeg`)
   return (
+    <>
     <group scale={0.12} position={[0,-1,0]} {...props} dispose={null}>
       <group rotation={[-Math.PI / 2, 0, 0]} scale={0.151}>
         <group rotation={[Math.PI / 2, 0, 0]}>
@@ -24,6 +25,9 @@ export function Iphone(props) {
         </group>
       </group>
     </group>
+    <Text fontSize={0.5} color="black" position={[0, 1.5, 0.15]}>12:00</Text>
+    <Text fontSize={0.2} color="black" position={[0, 1.1, 0.15]}>12월 13일 금요일</Text>
+    </>
   )
 }
 
